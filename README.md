@@ -18,8 +18,10 @@ Get the project template using git:
 2) Run `npm install` to get project dependencies installed (grunt, bower). Npm is installed when you install node.js.
 
 3) Run `bower install` to get web dependencies installed (bootstrap,jquery).
+A local copy of Bower will be installed in `node_modules/bower/bin/bower`.  However, you may want to have a global version installed using `npm install -g bower`.
 
-4) Test out grunt by running `grunt less` to run the less task that will compile the bootstrap less file into a css file usable by your site.  Open `www\index.html` in your browser.
+4) Test out grunt by running `grunt less` to run the less task that will compile the bootstrap less file into a css file usable by your site.  Open `www\index.html` in your browser.  A local copy of grunt will be installed in `node_modules/grunt-cli/bin/grunt`. However, you may want to have a global version installed using `npm install -g grunt` and `npm install -g grunt-cli`.
+
 
 ### Use [bower](http://bower.io/) to manage components.
 
