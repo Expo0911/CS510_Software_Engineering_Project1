@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Mini Project 1
 ==============
 
@@ -58,3 +59,7 @@ You will be graded on the configuration management of your app as well as your u
 * 20% app layout and content
 * 15% incorporate user input/dynamic content with knockoutjs
 * 15% incorporate visualization with d3
+=======
+CSC510-Software-Engineering-Project-online-Resume
+=================================================
+>>>>>>> 9487bfd905c9c6a7829503cf95e9fba0b7ecc14b
