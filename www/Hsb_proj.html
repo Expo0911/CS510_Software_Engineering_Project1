@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Shibo Hou">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>MiniProj: Online Resume</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <!-- after grunt build-all, do not need the following code at all>
+    <!link href="css/justified-nav.css" rel="stylesheet"-->
+
+`   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/knockout.js"></script-->
+    <script src="js/libs.js"></script>
+    <!--script src="d3/d3.js"></script>
+
+    <! HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CSC510 Mini Project-1 : Online Resume </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+
+    <h4>
+    <div class="container">
+      <div class="masthead">
+        <h3 class="text-muted"> Shibo Hou (Current NCSU PhD)</h3>
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#">Summary</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Education<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">High School</a></li>
+              <li><a href="#">Bachelor</a></li>
+              <li><a href="#">Master</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Current PhD</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Work Experience</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Research<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Research Field</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Past Research</a></li>
+              <li><a href="#">Current Research</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publications<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Papers</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Journals</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Books</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Honors</a></li>
+        </ul>
+      </div>
+    </h4>
+
+
+
+
+
+    <!--    d3 dynamic show     -->
+      </div>
+      <!DOCTYPE html>
+      <meta charset="utf-8">
+      <style>
+
+      .hexagon {
+        fill: none;
+        stroke: #000;
+        stroke-width: .5px;
+      }
+
+      </style>
+      <body>
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <script src="http://d3js.org/d3.hexbin.v0.min.js"></script>
+      <script>
+
+      var width = 1400,
+          height = 500,
+          i = -1,
+          θ = 0,
+          δθ = .01,
+          n = 2000,
+          k = 100; // samples to replace per frame
+
+      var randomX = d3.random.normal(width / 2, 60),
+          randomY = d3.random.normal(height / 2, 60),
+          points = d3.range(n).map(function() { return [randomX(), randomY()]; });
+
+      var color = d3.scale.linear()
+          .domain([0, 30])
+          .range(["red", "steelblue"])
+          .interpolate(d3.interpolateLab);
+
+      var hexbin = d3.hexbin()
+          .size([width, height])
+          .radius(20);
+
+      var svg = d3.select("body").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+
+      var hexagon = svg.append("g")
+          .attr("class", "hexagons")
+        .selectAll("path")
+          .data(hexbin(points))
+        .enter().append("path")
+          .attr("d", hexbin.hexagon(19.5))
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+          .style("fill", function(d) { return color(d.length); });
+
+      d3.timer(function() {
+        θ += δθ;
+        randomX = d3.random.normal(width / 2 + 80 * Math.cos(θ), 80),
+        randomY = d3.random.normal(height / 2 + 80 * Math.sin(θ), 80);
+
+        for (var j = 0; j < k; ++j) {
+          i = (i + 1) % n;
+          points[i][0] = randomX();
+          points[i][1] = randomY();
+        }
+
+        hexagon = hexagon
+            .data(hexbin(points), function(d) { return d.i + "," + d.j; });
+
+        hexagon.exit().remove();
+
+        hexagon.enter().append("path")
+            .attr("d", hexbin.hexagon(19.5))
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+        hexagon
+            .style("fill", function(d) { return color(d.length); });
+      });
+
+      </script>
+      </div>
+    <!--   code ends      -->
+
+
+
+
+
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>Programming Ability!</h1>
+        <p class="lead">Click the button below to get a close look at the GitHub account of Shibo Hou! (PS: GitHub could be treated as the Resume of programmers)</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button"> Link to GitHub</a></p>
+      </div>
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Statement</h2>
+          <p class="text-danger">I am now a second year Computer Engineering PhD student under ECE department at NC State University. My instructor is Assistant Professor Aranya Chakrabortty. My research interest contains Computer System Netwoking, Software Development&Mobile Apps and Internet Protocols. In 2013, I worked in Capgemini Consulting
+          as an Associate Consultant at BTS BIM Department. Feel free to contact me by Email : )</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2>Skills</h2>
+          <p><b>Computer skills:</b></p>
+          <p>C&C++, Java, Matlab, Opnet, VHDL, Assembly language,HTML</p>
+          <p><b>Maths skills:</b></p>
+          <p>Matrix Theory, Probabilities, Calculus, Stochastic Process, Mathematical Modeling, Data structure and Algorithms</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-lg-4">
+          <h2>Courses</h2>
+          <p>This fall semster, I take three courses:</p>
+          <p>1. <b>CSC510</b> Software Engineering, Instructor: C. Parnin</p>
+          <p>2. <b>ECE582</b> Wireless Communication Systems, Instructor: J. Townsend</p>
+          <p>3. <b>ECE726</b> Advanced Feedback Control, Instructor: A. Chakrabortty</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+      <!--code ends-->
+
+
+
+
+      <!--   add paper and delete paper (dynamic input part)    -->
+      <h2>
+      <b>Publications</b>
+      </h2>
+      <ul data-bind="foreach: people">
+          <li>
+              <!-- paper at postions[use $index() to get postion 0]--> 
+              [<span data-bind="text: ($index() + 1)"> </span>]:
+              <span data-bind="text: paper"> </span>
+              <a href="#" data-bind="click: $parent.removePerson">Remove</a>
+          </li>
+      </ul>
+      <button data-bind="click: addPerson">Add paper</button>
+
+      <script type="text/javascript">
+      function AppViewModel() {
+          var self = this;
+       
+          self.people = ko.observableArray([
+              { paper: '"Low Complexity Fast LMMSE-based Channel Estimation for OFDM Systems in Frequency Selective Rayleigh Fading Channels", Shibo Hou, Jiamo Jiang, IEEE 76th Vehicular Technology Conference (VTC2012-Fall), Quebec, Canada (Oral Presentation September 2012)' },
+              { paper: '"An Effective Interference Management Framework to Achieve Energy-Efficient Communications for Heterogeneous Net- work through Cognitive Sensing", Shibo Hou, Xing Zhang, Huanyang Zheng, Long Zhao, Wei Fang, IEEE 7th International Conference on Communications and Networking in China (ChinaCom), Kunming, China (Oral Presentation August 2012)'},
+              { paper: '"A Gradient Projection Based Self-Optimizing Algorithm for Inter-cell Interference Coordination in Downlink OFDMA Net- works", Xuena Li, Hao Jin, Jiamo Jiang, Shibo Hou, Mugen Peng, Gongpu Wang, International Workshop on SON, Kunming, China, August 2012'}
+          ]);
+       
+          self.addPerson = function() {
+              self.people.push({ paper: "New at " + new Date() });
+          };
+       
+          self.removePerson = function() {
+              self.people.remove(this);
+          }
+      }
+       
+        ko.applyBindings(new AppViewModel());
+      </script>
+      <!--   test code ends     -->
+
+
+  <!--Slide image for outdoor activities-->
+      <h3>
+      <b>Recent Outdoor Activites</b>
+      </h3>
+      <h5>
+      <p align="middle"><b>Crab Hunt during 2014 Labor day</b></p>
+      </h5>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img src="1.jpg" align="middle" hspace="330" width="800" height="800">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="item">
+          <img src="2.jpg" align="middle" hspace="330" width="800" height="800">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="item">
+          <img src="3.jpg" align="middle" hspace="330" width="800" height="800">
+          <div class="carousel-caption">
+          </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  <!--ends-->
+
+
+
+
+
+      <!-- Site footer -->
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <ul class="list-inline">
+                <li class="pull-right"><a href="#top">Back to top</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+              </div>
+            </div>
+          <p>&copy; Shibo Hou, ECE Department NCSU, 2014</p>
+        </div>
+      </footer>
+      <!--footer ends-->
+
+
+
+  </body>
+</html>

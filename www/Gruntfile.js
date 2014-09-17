@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 	  concat:
 	  {
 	  	package:{
-	  		src:['www/js/jquery.min.js','www/js/ie-emulation-modes-warning.js','www/js/knockout.js','www/js/bootstrap.min.js', 'www/js/ie10-viewport-bug-workaround.js','www/js/d3.js'],
+	  		src:['www/js/ie-emulation-modes-warning.js','www/js/knockout.js','www/js/bootstrap.min.js', 'www/js/ie10-viewport-bug-workaround.js'],
 	  		dest:'www/js/libs.js'
 	  	}  	
 	  },
@@ -40,14 +40,14 @@ module.exports = function(grunt) {
 
 	 // dist: {
 	    files: {
-	      'www/js/libs.min.js': ['www/js/libs.js']
+	      'www/js/libs.min.js': ['www/js/lib.js']
 	    }
 	  //}
 	},
       jshint:
      {
 	  // define the files to lint
-	  files: ['Gruntfile.js', 'www/js/libs.min.js'],
+	  files: ['Gruntfile.js', 'www/js/libs.min.js',],
 	  // configure JSHint (documented at http://www.jshint.com/docs/)
 	  options: { 
             force: true,
